@@ -2,7 +2,7 @@ app.component('headerItem', {
     templateUrl: 'header.html',
     controllerAs: 'header',
     bindings: {
-        img: '@'
+        imageUrl: '@'
     },
     controller: function (Menu) {
 

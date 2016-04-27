@@ -4,6 +4,7 @@ app.component('footItem', {
     transclude:{
     },
     bindings: {
+        imageUrl: '@'
     },
     controller: function ($element, $timeout) {
 

@@ -6,8 +6,7 @@ var gulp = require('gulp'),
     babel = require("gulp-babel"),
     sass = require("gulp-sass"),
     shell = require('gulp-shell'),
-    autoprefixer = require('gulp-autoprefixer'),
-    lwip = require("gulp-lwip");
+    autoprefixer = require('gulp-autoprefixer');
 
 var catchError = function (e) {
     console.log('>>> ERROR', e);
@@ -37,10 +36,6 @@ gulp.task('copy-public', () => {
         .pipe(gulp.dest("release/public"));
 
     gulp.src(["src/public/img/**/*.jpg"])
-        .pipe(lwip
-            .rescale(null, 800)
-            .exportAs("jpg", {quality:90})
-        )
         .pipe(gulp.dest("release/public/img"));
 
 });

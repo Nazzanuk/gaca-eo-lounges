@@ -1,11 +1,36 @@
 hero-item {
   .hero {
     .hero-banner {
-      height: 300px;
+      height: 700px;
       position: relative;
+      overflow: hidden;
       background: #eee;
-      background-size: cover;
-      background-position: center;
+
+      @media (max-width:767px) {
+        height: 400px;
+      }
+
+      .banner-img {
+        position: absolute;
+        background-size: cover;
+        background-position: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        opacity: 0;
+        transition: 3s;
+
+        &.active {
+          opacity: 1;
+
+        }
+
+        &.animate-hero {
+          animation: hero 9s infinite;
+        }
+      }
 
       .banner-overlay {
         position: absolute;
@@ -13,9 +38,13 @@ hero-item {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.2);
+        padding-top: 50px;
+        text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+        z-index: 2;
 
         display: flex;
+        flex-direction: column;
         text-align: center;
         align-content: center;
         justify-content: center;
@@ -23,9 +52,30 @@ hero-item {
         justify-items: center;
         color: white;
 
-        font-size: 50px;
-        font-weight: 100;
+        font-size: 40px;
+        font-weight: 300;
+
+        @media (max-width:767px) {
+          padding: 0 30px;
+          padding-top: 50px;
+          font-size: 30px;
+        }
       }
     }
+  }
+}
+
+
+@keyframes hero {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(2deg) scale(1.1);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(1);
   }
 }

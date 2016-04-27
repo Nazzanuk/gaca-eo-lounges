@@ -1,0 +1,36 @@
+contact-item {
+  //background: #ccc;
+  //display: block;
+  .contact {
+    padding: 50px 15px;
+    color: white;
+
+    input, textarea {
+      border: none;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+      border-radius:0 ;
+    }
+
+    .contact-items {
+
+      p {
+        font-size: 16px;
+        //font-weight: 900;
+        //text-transform: uppercase;
+        //font-family: 'Playfair Display', serif;
+        border-left: 2px solid white;
+        padding: 10px 0;
+        padding-left: 15px;
+      }
+
+    }
+
+    .control-label {
+      text-align: left;
+    }
+
+
+  }
+}
+

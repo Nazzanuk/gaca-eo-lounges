@@ -1,15 +1,38 @@
 <script type="text/ng-template" id="header.html">
     <div class="header">
         <div class="container">
-            <strong>Angular Base</strong>
+            <!--<span class="logo">GACA-EO</span>-->
 
-            <div class="header-menu">
+            <div class="visible-xs header-menu-icon" ng-click="header.toggleSidebar()"><i class="fa fa-bars"></i></div>
+
+            <span class="pull-right"><img src="public/img/gaga-eo-logo-white.png" ui-sref="home" alt="" style="height: 65px;margin-top: -30px"></span>
+
+            <div class="header-menu hidden-xs">
                 <div class="menu-item"
                      ng-repeat="page in header.getPages()"
                      ng-click="header.setPage(page.slug)"
                      ng-class="{active:header.isCurrentPage(page.slug)}"
-                >{{page.name}}</div>
+                >{{page.name}}
+                </div>
             </div>
+
+            <div class="butn pull-right">English &nbsp; <i class="fa fa-angle-down"></i></div>
+        </div>
+
+        <div class="menu-sidebar" ng-class="{active:header.showSidebar()}">
+            <div class="sidebar-header">
+                <div class="container">
+                    <div class="visible-xs header-menu-icon" ng-click="header.toggleSidebar()"><i class="fa fa-times"></i></div>
+                    <div class="pull-right visible-xs">Menu</div>
+                </div>
+            </div>
+
+            <div class="sidebar-item"
+                 ng-repeat="page in header.getPages()"
+                 ng-click="header.setPage(page.slug);header.toggleSidebar()"
+                 ng-class="{active:header.isCurrentPage(page.slug)}"
+            >{{page.name}}</div>
+
         </div>
 
 

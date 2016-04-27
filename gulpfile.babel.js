@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     babel = require("gulp-babel"),
     sass = require("gulp-sass"),
     shell = require('gulp-shell'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
+    lwip = require("gulp-lwip");
 
 var catchError = function (e) {
     console.log('>>> ERROR', e);
@@ -23,18 +24,27 @@ gulp.task("default", () => gulp.start([
     'gen-lib-css'
 ]));
 
-gulp.task('dev', ['default'], () => {
+gulp.task('dev', ['start-server', 'default'], () => {
     gulp.watch([
         'src/**/*'
     ], ['default']);
 });
 
-//gulp.task('start-server', shell.task(['sh start-server.sh']));
+gulp.task('start-server', shell.task(['sh start-server.sh']));
 
-gulp.task('copy-public', () =>
-    gulp.src(['src/public/**/*'])
-        .pipe(gulp.dest("release/public"))
-);
+gulp.task('copy-public', () => {
+    gulp.src(['src/public/**/*.!(jpg)*'])
+        .pipe(gulp.dest("release/public"));
+
+    gulp.src(["src/public/img/**/*.jpg"])
+        .pipe(lwip
+            .rescale(null, 800)
+            .exportAs("jpg", {quality:90})
+        )
+        .pipe(gulp.dest("release/public/img"));
+
+});
+
 
 gulp.task("gen-html", () =>
     gulp.src([

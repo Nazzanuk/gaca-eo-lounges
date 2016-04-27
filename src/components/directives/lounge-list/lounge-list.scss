@@ -1,0 +1,61 @@
+lounge-list-item {
+  .lounge-list {
+
+    .lounge {
+      position: relative;
+      //height: 300px;
+      margin-top: 30px;
+
+      //> * {
+      //  height: 400px;
+      //  > * {
+      //    height: 400px;
+      //  }
+      //}
+
+      .lounge-image {
+        position: relative;
+        margin-right: -120px;
+
+        height: 250px;
+        background: white;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 10;
+      }
+
+      .lounge-text {
+        box-shadow: 0 0 5px rgba(0,0,0,0.35);
+        position: relative;
+        left: -120px;
+        margin-right: -120px;
+        top: 30px;
+        z-index: 11;
+        height: 190px;
+        background: rgba(255,255,255,0.92);
+        padding: 30px 30px 30px 30px;
+        color: #444;
+
+        h2 {
+          font-size: 20px;
+          font-weight: 100;
+          font-family: 'Playfair Display', serif;
+          border-left: 2px solid $primary;
+          padding: 10px 0;
+          padding-left: 15px;
+          margin: 0 0 10px;
+          color: #333;
+        }
+
+        p {
+          font-size: 12px;
+        }
+
+      }
+
+
+    }
+
+  }
+}

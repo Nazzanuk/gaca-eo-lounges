@@ -1,32 +1,102 @@
 header-item {
   .header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 50px;
+    padding-top: 30px;
+    //height: 50px;
     line-height: 50px;
+    border-bottom: rgba(255,255,255,0.45) 1px solid;
+    z-index: 1000;
+    color: white;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    background: rgba(0,0,0,0.15);
 
-    background: white;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    .butn {
+      margin: 5px 30px 0 0;
+    }
+
+    .logo {
+      float: right;
+    }
+
+    .header-menu-icon {
+      font-size: 20px;
+      float: left;
+      cursor: pointer;
+      transition: .2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .menu-sidebar {
+      top: 0;
+      height: 100%;
+      position: fixed;
+      transform: translateX(-310px);
+      z-index: 2000;
+      background: rgba(255, 255, 255, 0.92);
+      //background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+      left: 0;
+      width: 300px;
+      transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+
+      .sidebar-header {
+        background: transparentize($primary, 0.1);
+        color: white;
+        padding-top: 29px;
+        //height: 50px;
+        line-height: 50px;
+        border-bottom: rgba(0,0,0,0.15) 1px solid;
+      }
+
+      .sidebar-item {
+        line-height: 50px;
+        color: #222;
+        padding-left: 15px;
+        border-top: white 1px solid;
+        cursor: pointer;
+        border-left:$primary 3px solid;
+        transition: .2s;
+
+        &:hover {
+          padding-left: 20px;
+          background: white;
+        }
+      }
+
+      &.active {
+        transform: translateX(0px);
+      }
+
+
+
+    }
 
     .header-menu {
-      float: right;
 
       .menu-item {
         float: left;
         line-height: 48px;
-        padding: 0 20px;
-        border-bottom: 2px solid white;
+        padding: 0 10px;
+        border-bottom: 2px solid transparent;
         transition: .3s;
         cursor: pointer;
+        //text-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
 
         &:hover {
-          border-bottom: 2px solid #ccc;
+          border-bottom: 2px solid rgba(255,255,255,0.45);
         }
 
         &.active {
-          border-bottom: 2px solid $primary;
+          border-bottom: 2px solid rgba(255,255,255,0.45);
         }
       }
     }

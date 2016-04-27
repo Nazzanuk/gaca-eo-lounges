@@ -2,21 +2,34 @@
     <div screen="home">
 
         <!-- one way pass values to component -->
+        <!--img="http://www.woodsbagot.com/wp-content/uploads/2013/08/Qantas_Singapore_N21_hero.jpg"-->
         <hero-item
-                img="https://unsplash.it/1200/500/?random"
-                heading="Welcome to Angular Base"
+                animate="true"
+                imgs="['public/img/lounges/1.jpg', 'public/img/lounges/2.jpg', 'public/img/lounges/3.jpg', 'public/img/lounges/4.jpg']"
+                heading="Discover luxurious lounges <br>with all services included"
+                link-text="Our Lounges"
+                link-url="#/lounges"
         ></hero-item>
 
-        <content-item>
+        <block-item
+                img="public/img/lounges/5.jpg"
+        >
             <content>
-                <h1>What is this?</h1>
+                <h1>World class lounges</h1>
 
                 <p>
-                    Angular base is a project developed by
-                    <a href="#">Nathan Nelson</a> to help get started with JavaScript, ES6 and single page app structure in Angular 1.5.
+                    EO lounges have been an established destination for first-class and business travellers for over 30 years.
+                </p>
+
+                <p>
+                    Our lounges provide the best areas for passengers to sit-back and relax, with free Wi-Fi, gourmet food and state of the art ergonomics.
                 </p>
             </content>
-        </content-item>
+        </block-item>
+
+        <featured-item></featured-item>
+
+        <foot-item></foot-item>
 
     </div>
 </script>

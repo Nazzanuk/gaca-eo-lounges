@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <base href="/">
+    <!--<base href="/">-->
 
-    <title>Angular Base</title>
+    <title>GACA Executive Office</title>
     <title><%= title %></title>
     <meta name="description" content=""/>
 
@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="public/lib.css"/>
     <link rel="stylesheet" href="public/app.css"/>
 
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,600,400italic,600italic,700,700italic,900,900italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,100,100italic,200,200italic,300,300italic,600,400italic,600italic,700,700italic,900,900italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,600,400italic,600italic,700italic,700|Catamaran:400,100,200,300,500,600,700,800,900|Lato:400,100,900italic,700italic,900,400italic,700,300italic,300,100italic|Playfair+Display:400,400italic,700,900italic,900,700italic' rel='stylesheet' type='text/css'>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 </head>
@@ -29,6 +30,94 @@
 <div ui-view></div>
 
 
+<script type="text/ng-template" id="block.html">
+    <div class="block" ng-class="{dark:block.dark}">
+
+        <div class="block-image-holder hidden-xs">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 col-md-5" ng-class="{'pull-right':block.reverse}"></div>
+                    <div class="col-sm-6 col-md-7" ng-style="{'pull-right':block.reverse}">
+                        <div class="row">
+                            <div class="block-image" style="background-image: url('{{block.img}}')">
+                                <div class="img-overlay"></div>
+                                <div class="butn" ng-show="block.btnText">{{block.btnText}} &nbsp;
+                                    <i class="fa fa-angle-down"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-5 col-lg-4" ng-class="{'pull-right':block.reverse}">
+                    <div class="block-content" ng-transclude="content"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block-image visible-xs" style="min-height:300px;background-image: url('{{block.img}}')">
+            <div class="img-overlay"></div>
+            <div class="butn" ng-show="block.btnText">{{block.btnText}} &nbsp; <i class="fa fa-angle-down"></i></div>
+        </div>
+
+
+    </div>
+</script>
+<script type="text/ng-template" id="contact.html">
+    <div class="container">
+        <div class="contact">
+            <div class="row">
+                <div class="col-sm-7">
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputName3" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName3" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Question</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="inputPassword3" rows="8"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="butn" style="margin: 0;display: inline-block">Submit &nbsp; <i class="fa fa-check"></i></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-5">
+                    <div class="contact-items">
+                        <p>
+                            <i class="fa fa-phone fa-fw"></i> &nbsp; +1-234-567-890
+                        </p>
+                        <p>
+                            <i class="fa fa-envelope fa-fw"></i> &nbsp; help@eo.gaca.gov.sa
+                        </p>
+                        <p>
+                            <i class="fa fa-comment fa-fw"></i> &nbsp; feedback@eo.gaca.gov.sa
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>
 <script type="text/ng-template" id="content.html">
     <div class="content">
         <div class="container">
@@ -36,18 +125,123 @@
         </div>
     </div>
 </script>
+<script type="text/ng-template" id="featured.html">
+    <div class="featured">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="featured-image"
+                             style="background-image: url('public/img/lounges/13.jpg')">
+                            <div class="img-overlay"></div>
+
+                            <div class="butn">King Abdulaziz</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="featured-image"
+                             style="background-image: url('public/img/lounges/11.jpg')">
+                            <div class="img-overlay"></div>
+
+                            <div class="butn">Jeddah</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="featured-image"
+                             style="background-image: url('public/img/lounges/7.jpg')">
+                            <div class="img-overlay"></div>
+
+                            <div class="butn">King Fahd</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>
+<script type="text/ng-template" id="foot-item.html">
+    <div class="foot">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="foot-logo" style="">
+                        <img src="public/img/gaga-eo-logo-white.png" alt="" style="height: 65px">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="foot-header">EO Lounges</div>
+                    <div class="foot-item">Cloud Nine Lounge</div>
+                    <div class="foot-item">Marhaba Lounge</div>
+                    <div class="foot-item">Marhaba</div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="foot-header">About EO</div>
+                    <div class="foot-item">CROWN</div>
+                    <div class="foot-item">Aldhabi Longe</div>
+                    <div class="foot-item">Dilmun Lounge</div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="foot-header">Contact</div>
+                    <div class="foot-item">Cedar Lounge</div>
+                    <div class="foot-item">Plaza Premium Lounge</div>
+                    <div class="foot-item">GVK Lounge</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="underfoot">
+        <div class="container">
+            Copyright &copy; 2016 &nbsp;<a href="#"> GACA Executive Office</a>
+        </div>
+
+    </div>
+</script>
 <script type="text/ng-template" id="header.html">
     <div class="header">
         <div class="container">
-            <strong>Angular Base</strong>
+            <!--<span class="logo">GACA-EO</span>-->
 
-            <div class="header-menu">
+            <div class="visible-xs header-menu-icon" ng-click="header.toggleSidebar()"><i class="fa fa-bars"></i></div>
+
+            <span class="pull-right"><img src="public/img/gaga-eo-logo-white.png" ui-sref="home" alt="" style="height: 65px;margin-top: -30px"></span>
+
+            <div class="header-menu hidden-xs">
                 <div class="menu-item"
                      ng-repeat="page in header.getPages()"
                      ng-click="header.setPage(page.slug)"
                      ng-class="{active:header.isCurrentPage(page.slug)}"
-                >{{page.name}}</div>
+                >{{page.name}}
+                </div>
             </div>
+
+            <div class="butn pull-right">English &nbsp; <i class="fa fa-angle-down"></i></div>
+        </div>
+
+        <div class="menu-sidebar" ng-class="{active:header.showSidebar()}">
+            <div class="sidebar-header">
+                <div class="container">
+                    <div class="visible-xs header-menu-icon" ng-click="header.toggleSidebar()"><i class="fa fa-times"></i></div>
+                    <div class="pull-right visible-xs">Menu</div>
+                </div>
+            </div>
+
+            <div class="sidebar-item"
+                 ng-repeat="page in header.getPages()"
+                 ng-click="header.setPage(page.slug);header.toggleSidebar()"
+                 ng-class="{active:header.isCurrentPage(page.slug)}"
+            >{{page.name}}</div>
+
         </div>
 
 
@@ -55,43 +249,220 @@
 </script>
 <script type="text/ng-template" id="hero.html">
     <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+        <div class="hero-banner" ng-style="{height:hero.height}">
+            <div class="banner-img"
+                 ng-repeat="img in hero.getImages() track by $index"
+                 ng-class="{active:hero.isCurrentImage($index), 'animate-hero':hero.animate}"
+                 style="background-image: url('{{img}}')"
+            ></div>
             <div class="banner-overlay">
-                {{hero.heading}}
+                <div ng-bind-html="hero.getHeading()"></div>
+
+                <a class="butn" ng-show="hero.linkText" ng-href="{{hero.linkUrl}}">{{hero.linkText}}</a>
+
             </div>
         </div>
     </div>
 </script>
-<script type="text/ng-template" id="about-screen.html">
-    <div screen="about">
+<script type="text/ng-template" id="lounge-list.html">
+    <div class="lounge-list">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" ng-repeat="lounge in loungeList.getLounges() track by $index">
+                    <div class="lounge">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="lounge-image" style="background-image: url('{{lounge.img}}')">
+                                    <!--<div class="butn">{{lounge.name}}</div>-->
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="lounge-text">
+                                    <h2>{{lounge.name}}</h2>
+
+                                    <p>Plenty of seats, a good selection of food, clean, staff continually clearing away rubbish and dishes and an audible flight announcement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</script>
+<script type="text/ng-template" id="contact-screen.html">
+    <div screen="contact">
 
         <!-- one way pass values to component -->
         <hero-item
-                img="https://unsplash.it/1200/500/?random&123"
-                heading="About Angular Base"
+                imgs="['public/img/lounges/11.jpg']"
+                heading="Get In Touch"
         ></hero-item>
+
+        <block-item img="public/img/lounges/12.jpg" dark="true">
+            <content>
+                <h1>Contact Us</h1>
+
+                <p>
+                    To contact the Executive Office with specific questions please fill out the attached form and it will be forwarded to a designated member of staff to answer your questions.
+                </p>
+            </content>
+        </block-item>
+
+        <contact-item></contact-item>
+
+        <foot-item></foot-item>
+
+
     </div>
 </script>
 <script type="text/ng-template" id="home-screen.html">
     <div screen="home">
 
         <!-- one way pass values to component -->
+        <!--img="http://www.woodsbagot.com/wp-content/uploads/2013/08/Qantas_Singapore_N21_hero.jpg"-->
         <hero-item
-                img="https://unsplash.it/1200/500/?random"
-                heading="Welcome to Angular Base"
+                animate="true"
+                imgs="['public/img/lounges/1.jpg', 'public/img/lounges/2.jpg', 'public/img/lounges/3.jpg', 'public/img/lounges/4.jpg']"
+                heading="Discover luxurious lounges <br>with all services included"
+                link-text="Our Lounges"
+                link-url="#/lounges"
         ></hero-item>
 
-        <content-item>
+        <block-item
+                img="public/img/lounges/5.jpg"
+        >
             <content>
-                <h1>What is this?</h1>
+                <h1>World class lounges</h1>
 
                 <p>
-                    Angular base is a project developed by
-                    <a href="#">Nathan Nelson</a> to help get started with JavaScript, ES6 and single page app structure in Angular 1.5.
+                    EO lounges have been an established destination for first-class and business travellers for over 30 years.
+                </p>
+
+                <p>
+                    Our lounges provide the best areas for passengers to sit-back and relax, with free Wi-Fi, gourmet food and state of the art ergonomics.
                 </p>
             </content>
-        </content-item>
+        </block-item>
 
+        <featured-item></featured-item>
+
+        <foot-item></foot-item>
+
+    </div>
+</script>
+<script type="text/ng-template" id="mission-screen.html">
+    <div screen="mission">
+
+        <!-- one way pass values to component -->
+        <hero-item
+                imgs="['public/img/lounges/airport.jpg']"
+                heading="Mission & Vision"
+        ></hero-item>
+
+        <block-item img="public/img/lounges/12.jpg">
+            <content>
+                <h1>Planned & Executed</h1>
+
+                <p>
+                    The VIP Lounge aims to make the planning and execution of your event as easy and stress free as possible. Our experienced and dedicated events coordinators will guide you through every step of planning your event, from designing your event theme to choosing menus and putting the finishing flourishes to your plans.
+                </p>
+                <p>
+                    Every one of our clients has a distinct vision for their big day and we will work with you combining your dreams with our ideas and years of experience in executing stunning and flawless events.
+                </p>
+            </content>
+        </block-item>
+
+        <foot-item></foot-item>
+
+
+    </div>
+</script>
+<script type="text/ng-template" id="lounges-screen.html">
+    <div screen="lounges">
+
+
+        <hero-item
+                imgs="['http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME']"
+                heading="Our Lounges"
+        ></hero-item>
+
+
+        <div class="container">
+            <div style="height: 40px;"></div>
+            <h2><a href="">International Lounges &nbsp;  <i class="fa fa-angle-down"></i></a></h2>
+        </div>
+
+
+        <lounge-list-item></lounge-list-item>
+
+        <div style="height: 50px;"></div>
+
+        <foot-item></foot-item>
+    </div>
+</script>
+<script type="text/ng-template" id="our-services-screen.html">
+    <div screen="our-services">
+
+
+        <hero-item
+                imgs="['public/img/lounges/6.jpg']"
+                heading="Our Services"
+        ></hero-item>
+
+
+        <!--<div class="container">-->
+        <!--<div style="height: 40px;"></div>-->
+        <!--<h2><a href="">International Lounges &nbsp;  <i class="fa fa-angle-down"></i></a></h2>-->
+        <!--</div>-->
+
+
+        <!--<lounge-list-item></lounge-list-item>-->
+
+        <block-item
+                img="public/img/lounges/vip.jpg"
+        >
+            <content>
+                <h1>Priority Immigration Services</h1>
+
+                <p>
+                    EO lounges have been an established destination for first-class and business travellers for over 30 years.
+                </p>
+            </content>
+        </block-item>
+
+        <block-item
+                img="public/img/lounges/mac.jpg"
+                reverse="true"
+        >
+            <content>
+                <h1>WiFi</h1>
+
+                <p>
+                    Our lounges provide the best areas for passengers to sit-back and relax, with free Wi-Fi, gourmet food and state of the art ergonomics.
+                </p>
+            </content>
+        </block-item>
+
+        <block-item
+                img="public/img/lounges/7.jpg"
+        >
+            <content>
+                <h1>Comfort Seating</h1>
+
+                <p>
+                    EO lounges have been an established destination for first-class and business travellers for over 30 years.
+                </p>
+            </content>
+        </block-item>
+
+        <!--<div style="height: 50px;"></div>-->
+
+        <foot-item></foot-item>
     </div>
 </script>
 <script src="public/lib.js"></script>

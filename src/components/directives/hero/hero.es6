@@ -2,15 +2,33 @@ app.component('heroItem', {
     templateUrl: 'hero.html',
     controllerAs: 'hero',
     bindings: {
-        img: '@',
-        heading: '@'
+        imgs: '=',
+        heading: '@',
+        height: '@',
+        linkText: '@',
+        linkUrl: '@',
+        animate:'='
     },
-    controller: function ($element, $timeout) {
+    controller: function ($element, $timeout, $sce, $interval) {
 
-        var init = () => {};
+        var currentImage = 0, images = this.imgs;
+
+        var init = () => {
+
+            $interval(() => {
+                currentImage = ++currentImage == images.length ? 0 : currentImage;
+                console.log(currentImage);
+            }, 4500);
+
+        };
 
         init();
 
-        _.extend(this, {});
+        _.extend(this, {
+            getImages:() => images,
+            getCurrentImage: () => images[currentImage],
+            isCurrentImage: (index) => index == currentImage,
+            getHeading: () => $sce.trustAsHtml(this.heading)
+        });
     }
 });

@@ -1,15 +1,26 @@
-$body: #212121;
-$primary: #0091de;
+$body: #777;
+$primary: #3a91ac;
+$primary: #ac8b12;
 $secondary: #454545;
 
 html, body {
   font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
+
   overflow-x: hidden;
-  background: rgb(244, 244, 244);
+  background: #282828;
+  color: #fff;
+
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-smooth: always;
 }
 
 input, textarea {
   font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 body {
@@ -40,10 +51,64 @@ body {
 
 [screen] {
   opacity: 0;
-  padding-top: 50px;
+  //padding-top: 50px;
   transition: .3s;
 
   &.active {
     opacity: 1;
+  }
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+  transition: .3s;
+
+  &:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &:hover, &:active {
+    color: $primary;
+    text-decoration: none;
+  }
+}
+
+h1, h2 {
+  font-size: 20px;
+  font-weight: 100;
+  font-family: 'Playfair Display', serif;
+  margin: 0 0 10px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+.butn {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 0 20px;
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 20px;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.5);
+  //background: rgba(255, 255,255, 0.45);
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: white;
+  //color: black;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: .3s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: white;
+
   }
 }

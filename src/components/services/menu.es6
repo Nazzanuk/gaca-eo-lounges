@@ -3,7 +3,10 @@ app.service('Menu', ($state, $stateParams, $timeout) => {
     var currentPage,
         pages = [
             {name: "Home", slug: "home"},
-            {name: "About", slug: "about"}
+            {name: "Services", slug: "our-services"},
+            {name: "Lounges", slug: "lounges"},
+            {name: "Mission & Vision", slug: "mission"},
+            {name: "Contact", slug: "contact"}
         ];
 
     var setPage = (slug) => {

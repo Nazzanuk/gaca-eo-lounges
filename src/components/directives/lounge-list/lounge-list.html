@@ -1,0 +1,30 @@
+<script type="text/ng-template" id="lounge-list.html">
+    <div class="lounge-list">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" ng-repeat="lounge in loungeList.getLounges() track by $index">
+                    <div class="lounge">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="lounge-image" style="background-image: url('{{lounge.img}}')">
+                                    <!--<div class="butn">{{lounge.name}}</div>-->
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="lounge-text">
+                                    <h2>{{lounge.name}}</h2>
+
+                                    <p>Plenty of seats, a good selection of food, clean, staff continually clearing away rubbish and dishes and an audible flight announcement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</script>

@@ -1,8 +1,16 @@
 <script type="text/ng-template" id="hero.html">
     <div class="hero">
-        <div class="hero-banner" style="background-image: url('{{hero.img}}')">
+        <div class="hero-banner" ng-style="{height:hero.height}">
+            <div class="banner-img"
+                 ng-repeat="img in hero.getImages() track by $index"
+                 ng-class="{active:hero.isCurrentImage($index), 'animate-hero':hero.animate}"
+                 style="background-image: url('{{img}}')"
+            ></div>
             <div class="banner-overlay">
-                {{hero.heading}}
+                <div ng-bind-html="hero.getHeading()"></div>
+
+                <a class="butn" ng-show="hero.linkText" ng-href="{{hero.linkUrl}}">{{hero.linkText}}</a>
+
             </div>
         </div>
     </div>

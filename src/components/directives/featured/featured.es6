@@ -1,17 +1,38 @@
-app.component('featuredItem', {
+app.component('featuredItems', {
     templateUrl: 'featured.html',
+    bindToController: true,
     controllerAs: 'featured',
-    transclude:{
-        content:'?content'
+    transclude: true,
+    scope: {
+        image: '@',
+        title: '@'
     },
-    bindings: {
-    },
-    controller: function ($element, $timeout) {
+    controller: function ($scope, $element, $timeout) {
 
-        var init = () => {};
+        var featuredItems = [];
+
+        var loadFeaturedItems = () => {
+            $element.find('featured-item').each(function () {
+                featuredItems.push(getAttrs($(this)));
+            });
+        };
+
+        var init = () => {
+            $timeout(loadFeaturedItems);
+        };
 
         init();
 
-        _.extend(this, {});
+        _.extend(this, {
+            getFeaturedItems: () => featuredItems
+        });
     }
 });
+
+var getAttrs = ($el) => {
+    var obj = {};
+    $($el[0].attributes).each(function () {
+        obj[this.nodeName] = this.value;
+    });
+    return obj;
+};

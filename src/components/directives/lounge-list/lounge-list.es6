@@ -1,24 +1,24 @@
 app.component('loungeListItem', {
     templateUrl: 'lounge-list.html',
     controllerAs: 'loungeList',
-    transclude: {
-        content: '?content'
-    },
+    transclude: true,
     scope: {
         img: '@',
-        name: '@'
+        name: '@',
+        content: '@'
     },
     bindings: {
         name:'@'
     },
-    controller: function ($scope, $element, $timeout) {
+    controller: function ($scope, $element, $timeout, $sce) {
 
         var lounges = [];
 
         var loadLounges = () => {
-            console.log($element.html());
             $element.find('lounge-item').each(function () {
-                lounges.push(getAttrs($(this)));
+                var lounge = getAttrs($(this));
+                lounge["content"] = $sce.trustAsHtml($(this).find('content').html());
+                lounges.push(lounge);
             });
         };
 

@@ -1,17 +1,34 @@
 <script type="text/ng-template" id="lounge-list.html">
 
-    <div class="container">
-        <div style="height: 40px;"></div>
-        <h2><a href="">{{loungeList.name}} &nbsp;  <i class="fa fa-angle-down"></i></a></h2>
-    </div>
-
     <div class="lounge-list">
 
-        <div class="hide"ng-transclude></div>
+        <div class="container">
+            <!--<div style="height: 40px;"></div>-->
+            <!--<h2>{{loungeList.name}} &nbsp; <i class="fa fa-angle-down"></i></h2>-->
+
+            <div class="select-type">
+                <div class="lounge-types" ng-class="{visible:loungeList.isSelectVisible()}" ng-click="loungeList.setSelectVisible(false)">
+                    <div class="lounge-type"
+                         ng-repeat="type in loungeList.getTypes()"
+                         ng-click="loungeList.setType($index)"
+                         ng-bind="type + ' Lounges'"
+                    ></div>
+                </div>
+                <div class="current-type"
+                     ng-click="loungeList.setSelectVisible(!loungeList.isSelectVisible())"
+                >
+                    {{loungeList.getType()}} Lounges &nbsp; <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="hide" ng-transclude></div>
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-6" ng-repeat="lounge in loungeList.getLounges() track by $index">
+                <div class="col-sm-6" ng-if="loungeList.getType()" ng-repeat="lounge in loungeList.getLounges() | filter:loungeList.getType()">
                     <div class="lounge">
                         <div class="row">
                             <div class="col-xs-6">
@@ -21,7 +38,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="lounge-text">
-                                    <h2>{{lounge.name}}</h2>
+                                    <h2>{{lounge.name}} {{lounge.type}}</h2>
                                     <div class="block-content" ng-bind-html="lounge.content"></div>
                                 </div>
                             </div>

@@ -1,5 +1,52 @@
 lounge-list-item {
   .lounge-list {
+    padding-top: 40px;
+
+    .select-type {
+      font-size: 20px;
+      font-weight: 100;
+      font-family: 'Playfair Display', serif;
+      line-height: 40px;
+      height: 40px;
+      position: relative;
+      cursor: pointer;
+      z-index: 100;
+      user-select: none;
+
+      .lounge-types {
+        position: absolute;
+        top: 40px;
+        background: rgba(255, 255, 255, 1);
+        color: $body;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+        transition: .3s;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+
+        &.visible {
+          visibility: visible;
+          opacity: 1;
+          pointer-events: initial;
+        }
+
+        .lounge-type {
+          padding: 0 30px;
+          border-bottom: 1px solid #eee;
+          cursor: pointer;
+          transition: .2s;
+
+          *:last-child {
+            border: none;
+          }
+
+          &:hover {
+            background: #f7f7f7;
+            color: $primary;
+          }
+        }
+      }
+    }
 
     .lounge {
       position: relative;
@@ -26,14 +73,14 @@ lounge-list-item {
       }
 
       .lounge-text {
-        box-shadow: 0 0 5px rgba(0,0,0,0.35);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
         position: relative;
         left: -120px;
         margin-right: -120px;
         top: 30px;
         z-index: 11;
         height: 190px;
-        background: rgba(255,255,255,0.92);
+        background: rgba(255, 255, 255, 0.92);
         padding: 30px 30px 30px 30px;
         color: #444;
 
@@ -53,7 +100,6 @@ lounge-list-item {
         }
 
       }
-
 
     }
 

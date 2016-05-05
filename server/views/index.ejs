@@ -102,16 +102,39 @@
                 <div class="col-sm-5">
                     <div class="contact-items">
                         <p>
-                            <i class="fa fa-phone fa-fw"></i> &nbsp; +1-234-567-890
+                            <i class="fa fa-phone fa-fw"></i> &nbsp; {{contact.phoneNumber}}
                         </p>
                         <p>
-                            <i class="fa fa-envelope fa-fw"></i> &nbsp; help@eo.gaca.gov.sa
+                            <i class="fa fa-envelope fa-fw"></i> &nbsp; {{contact.helpEmail}}
                         </p>
                         <p>
-                            <i class="fa fa-comment fa-fw"></i> &nbsp; feedback@eo.gaca.gov.sa
+                            <i class="fa fa-comment fa-fw"></i> &nbsp; {{contact.feedbackEmail}}
                         </p>
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+    </div>
+</script>
+<script type="text/ng-template" id="featured.html">
+    <div class="featured">
+
+        <div class="hide" ng-transclude></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="item in featured.getFeaturedItems()">
+                    <div class="row">
+                        <div class="featured-image"
+                             style="background-image: url('{{item.image}}')">
+                            <div class="img-overlay"></div>
+
+                            <div class="butn">{{item.title}}</div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,56 +148,13 @@
         </div>
     </div>
 </script>
-<script type="text/ng-template" id="featured.html">
-    <div class="featured">
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="row">
-                        <div class="featured-image"
-                             style="background-image: url('public/img/lounges/13.jpg')">
-                            <div class="img-overlay"></div>
-
-                            <div class="butn">King Abdulaziz</div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="row">
-                        <div class="featured-image"
-                             style="background-image: url('public/img/lounges/11.jpg')">
-                            <div class="img-overlay"></div>
-
-                            <div class="butn">Jeddah</div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="row">
-                        <div class="featured-image"
-                             style="background-image: url('public/img/lounges/7.jpg')">
-                            <div class="img-overlay"></div>
-
-                            <div class="butn">King Fahd</div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</script>
 <script type="text/ng-template" id="foot-item.html">
     <div class="foot">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="foot-logo" style="">
-                        <img src="public/img/gaga-eo-logo-white.png" alt="" style="height: 65px">
+                        <img src="{{foot.imageUrl}}" alt="" style="height: 65px">
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -214,7 +194,7 @@
 
             <div class="visible-xs header-menu-icon" ng-click="header.toggleSidebar()"><i class="fa fa-bars"></i></div>
 
-            <span class="pull-right"><img src="public/img/gaga-eo-logo-white.png" ui-sref="home" alt="" style="height: 65px;margin-top: -30px"></span>
+            <span class="pull-right"><img src="{{header.imageUrl}}" ui-sref="home" alt="" style="height: 65px;margin-top: -30px"></span>
 
             <div class="header-menu hidden-xs">
                 <div class="menu-item"
@@ -265,11 +245,36 @@
     </div>
 </script>
 <script type="text/ng-template" id="lounge-list.html">
+
     <div class="lounge-list">
 
         <div class="container">
+            <!--<div style="height: 40px;"></div>-->
+            <!--<h2>{{loungeList.name}} &nbsp; <i class="fa fa-angle-down"></i></h2>-->
+
+            <div class="select-type">
+                <div class="lounge-types" ng-class="{visible:loungeList.isSelectVisible()}" ng-click="loungeList.setSelectVisible(false)">
+                    <div class="lounge-type"
+                         ng-repeat="type in loungeList.getTypes()"
+                         ng-click="loungeList.setType($index)"
+                         ng-bind="type + ' Lounges'"
+                    ></div>
+                </div>
+                <div class="current-type"
+                     ng-click="loungeList.setSelectVisible(!loungeList.isSelectVisible())"
+                >
+                    {{loungeList.getType()}} Lounges &nbsp; <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="hide" ng-transclude></div>
+
+        <div class="container">
             <div class="row">
-                <div class="col-sm-6" ng-repeat="lounge in loungeList.getLounges() track by $index">
+                <div class="col-sm-6" ng-if="loungeList.getType()" ng-repeat="lounge in loungeList.getLounges() | filter:loungeList.getType()">
                     <div class="lounge">
                         <div class="row">
                             <div class="col-xs-6">
@@ -279,9 +284,8 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="lounge-text">
-                                    <h2>{{lounge.name}}</h2>
-
-                                    <p>Plenty of seats, a good selection of food, clean, staff continually clearing away rubbish and dishes and an audible flight announcement.</p>
+                                    <h2>{{lounge.name}} {{lounge.type}}</h2>
+                                    <div class="block-content" ng-bind-html="lounge.content"></div>
                                 </div>
                             </div>
                         </div>
@@ -320,6 +324,42 @@
 
     </div>
 </script>
+<script type="text/ng-template" id="lounges-screen.html">
+    <div screen="lounges">
+
+
+        <hero-item
+                imgs="['http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME']"
+                heading="Our Lounges"
+        ></hero-item>
+
+
+        <!--<div class="container">-->
+            <!--<div style="height: 40px;"></div>-->
+            <!--<h2><a href="">International Lounges &nbsp;  <i class="fa fa-angle-down"></i></a></h2>-->
+        <!--</div>-->
+
+
+        <lounge-list-item types="['International', 'Regional', 'Local']">
+            <lounge-item
+                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
+                    name="My Lounge"
+                    content="hello"
+                    type="International"
+            ></lounge-item>
+            <lounge-item
+                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
+                    name="My Regional Lounge 2"
+                    content="hello 2"
+                    type="Regional"
+            ></lounge-item>
+        </lounge-list-item>
+
+        <div style="height: 50px;"></div>
+
+        <foot-item></foot-item>
+    </div>
+</script>
 <script type="text/ng-template" id="home-screen.html">
     <div screen="home">
 
@@ -353,56 +393,6 @@
 
         <foot-item></foot-item>
 
-    </div>
-</script>
-<script type="text/ng-template" id="mission-screen.html">
-    <div screen="mission">
-
-        <!-- one way pass values to component -->
-        <hero-item
-                imgs="['public/img/lounges/airport.jpg']"
-                heading="Mission & Vision"
-        ></hero-item>
-
-        <block-item img="public/img/lounges/12.jpg">
-            <content>
-                <h1>Planned & Executed</h1>
-
-                <p>
-                    The VIP Lounge aims to make the planning and execution of your event as easy and stress free as possible. Our experienced and dedicated events coordinators will guide you through every step of planning your event, from designing your event theme to choosing menus and putting the finishing flourishes to your plans.
-                </p>
-                <p>
-                    Every one of our clients has a distinct vision for their big day and we will work with you combining your dreams with our ideas and years of experience in executing stunning and flawless events.
-                </p>
-            </content>
-        </block-item>
-
-        <foot-item></foot-item>
-
-
-    </div>
-</script>
-<script type="text/ng-template" id="lounges-screen.html">
-    <div screen="lounges">
-
-
-        <hero-item
-                imgs="['http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME']"
-                heading="Our Lounges"
-        ></hero-item>
-
-
-        <div class="container">
-            <div style="height: 40px;"></div>
-            <h2><a href="">International Lounges &nbsp;  <i class="fa fa-angle-down"></i></a></h2>
-        </div>
-
-
-        <lounge-list-item></lounge-list-item>
-
-        <div style="height: 50px;"></div>
-
-        <foot-item></foot-item>
     </div>
 </script>
 <script type="text/ng-template" id="our-services-screen.html">
@@ -463,6 +453,33 @@
         <!--<div style="height: 50px;"></div>-->
 
         <foot-item></foot-item>
+    </div>
+</script>
+<script type="text/ng-template" id="mission-screen.html">
+    <div screen="mission">
+
+        <!-- one way pass values to component -->
+        <hero-item
+                imgs="['public/img/lounges/airport.jpg']"
+                heading="Mission & Vision"
+        ></hero-item>
+
+        <block-item img="public/img/lounges/12.jpg">
+            <content>
+                <h1>Planned & Executed</h1>
+
+                <p>
+                    The VIP Lounge aims to make the planning and execution of your event as easy and stress free as possible. Our experienced and dedicated events coordinators will guide you through every step of planning your event, from designing your event theme to choosing menus and putting the finishing flourishes to your plans.
+                </p>
+                <p>
+                    Every one of our clients has a distinct vision for their big day and we will work with you combining your dreams with our ideas and years of experience in executing stunning and flawless events.
+                </p>
+            </content>
+        </block-item>
+
+        <foot-item></foot-item>
+
+
     </div>
 </script>
 <script src="public/lib.js"></script>

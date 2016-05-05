@@ -7,13 +7,13 @@ app.component('featuredItems', {
         image: '@',
         title: '@'
     },
-    controller: function ($scope, $element, $timeout) {
+    controller: function ($scope, $element, $timeout, Helper) {
 
         var featuredItems = [];
 
         var loadFeaturedItems = () => {
             $element.find('featured-item').each(function () {
-                featuredItems.push(getAttrs($(this)));
+                featuredItems.push(Helper.getAttrs($(this)));
             });
         };
 
@@ -28,11 +28,3 @@ app.component('featuredItems', {
         });
     }
 });
-
-var getAttrs = ($el) => {
-    var obj = {};
-    $($el[0].attributes).each(function () {
-        obj[this.nodeName] = this.value;
-    });
-    return obj;
-};

@@ -14,12 +14,7 @@ app.component('heroItem', {
         var currentImage = 0, images = this.imgs;
 
         var init = () => {
-
-            $interval(() => {
-                currentImage = ++currentImage == images.length ? 0 : currentImage;
-                console.log(currentImage);
-            }, 4500);
-
+            $interval(() => currentImage = ++currentImage == images.length ? 0 : currentImage, 4500);
         };
 
         init();

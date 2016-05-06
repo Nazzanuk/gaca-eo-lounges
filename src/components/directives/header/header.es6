@@ -3,7 +3,9 @@ app.component('headerItem', {
     controllerAs: 'header',
     transclude: true,
     bindings: {
-        imageUrl: '@'
+        imageUrl: '@',
+        langText:'@',
+        langUrl:'@'
     },
     controller: function (Menu, $element, Helper, $timeout) {
 

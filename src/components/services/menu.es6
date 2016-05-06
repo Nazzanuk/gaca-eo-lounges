@@ -5,7 +5,7 @@ app.service('Menu', ($state, $stateParams, $timeout) => {
     var setPage = (url) => {
         currentPage = url;
         //$state.go(url);
-        console.log('url', url);
+        //console.log('url', url);
         window.location.href = url;
     };
 
@@ -30,8 +30,6 @@ app.service('Menu', ($state, $stateParams, $timeout) => {
     };
 
     var init = () => {
-        console.log($state);
-        console.log('$state.get()', $state.get());
     };
 
     init();

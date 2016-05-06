@@ -32,6 +32,7 @@ foot-item {
       text-align: center;
       transition: .3s;
       cursor: pointer;
+      display: block;
 
       &:hover {
         color: $primary;

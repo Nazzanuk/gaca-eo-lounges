@@ -1,8 +1,7 @@
 app.component('footItem', {
     templateUrl: 'foot-item.html',
     controllerAs: 'foot',
-    transclude:{
-    },
+    transclude:true,
     bindings: {
         imageUrl: '@'
     },

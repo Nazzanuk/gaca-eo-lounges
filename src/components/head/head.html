@@ -24,7 +24,16 @@
 </head>
 <body data-ng-app="app">
 
-<header-item></header-item>
+<header-item>
+    <menu-item name="Home" url="http://google.com"></menu-item>
+    <menu-item name="Services">
+        <sub-item name="Serve" url="/hello"></sub-item>
+        <sub-item name="Serve 2" url="/hello2"></sub-item>
+    </menu-item>
+    <menu-item name="Lounges" url="#/lounges"></menu-item>
+    <menu-item name="Mission & Vision" url="#/mission"></menu-item>
+    <menu-item name="Contact" url="#/contact"></menu-item>
+</header-item>
 
 <!-- screen contents -->
 <div ui-view></div>

@@ -24,7 +24,16 @@
 </head>
 <body data-ng-app="app">
 
-<header-item></header-item>
+<header-item>
+    <menu-item name="Home" url="http://google.com"></menu-item>
+    <menu-item name="Services">
+        <sub-item name="Serve" url="/hello"></sub-item>
+        <sub-item name="Serve 2" url="/hello2"></sub-item>
+    </menu-item>
+    <menu-item name="Lounges" url="#/lounges"></menu-item>
+    <menu-item name="Mission & Vision" url="#/mission"></menu-item>
+    <menu-item name="Contact" url="#/contact"></menu-item>
+</header-item>
 
 <!-- screen contents -->
 <div ui-view></div>
@@ -118,6 +127,13 @@
 
     </div>
 </script>
+<script type="text/ng-template" id="content.html">
+    <div class="content">
+        <div class="container">
+            <div ng-transclude="content"></div>
+        </div>
+    </div>
+</script>
 <script type="text/ng-template" id="featured.html">
     <div class="featured">
 
@@ -139,13 +155,6 @@
             </div>
         </div>
 
-    </div>
-</script>
-<script type="text/ng-template" id="content.html">
-    <div class="content">
-        <div class="container">
-            <div ng-transclude="content"></div>
-        </div>
     </div>
 </script>
 <script type="text/ng-template" id="foot-item.html">
@@ -189,6 +198,8 @@
 </script>
 <script type="text/ng-template" id="header.html">
     <div class="header">
+        <div class="hide" ng-transclude></div>
+
         <div class="container">
             <!--<span class="logo">GACA-EO</span>-->
 
@@ -198,10 +209,18 @@
 
             <div class="header-menu hidden-xs">
                 <div class="menu-item"
-                     ng-repeat="page in header.getPages()"
-                     ng-click="header.setPage(page.slug)"
-                     ng-class="{active:header.isCurrentPage(page.slug)}"
-                >{{page.name}}
+                     ng-repeat="page in header.getPages() track by $index"
+                     ng-click="header.clickMenuItem($index);"
+                     ng-class="{active:header.isCurrentPage(page.url)}"
+                >{{page.name}} <span ng-show="page.sub">&nbsp; <i class="fa fa-caret-down"></i></span>
+
+                    <div class="sub-menu" ng-class="{active:page.active}">
+                        <a class="sub-menu-item"
+                             ng-repeat="sub in page.sub track by $index"
+                             href="{{sub.url}}"
+                        >{{sub.name}}</a>
+
+                    </div>
                 </div>
             </div>
 
@@ -218,8 +237,8 @@
 
             <div class="sidebar-item"
                  ng-repeat="page in header.getPages()"
-                 ng-click="header.setPage(page.slug);header.toggleSidebar()"
-                 ng-class="{active:header.isCurrentPage(page.slug)}"
+                 ng-click="header.setPage(page.url);header.toggleSidebar()"
+                 ng-class="{active:header.isCurrentPage(page.url)}"
             >{{page.name}}</div>
 
         </div>
@@ -324,42 +343,6 @@
 
     </div>
 </script>
-<script type="text/ng-template" id="lounges-screen.html">
-    <div screen="lounges">
-
-
-        <hero-item
-                imgs="['http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME']"
-                heading="Our Lounges"
-        ></hero-item>
-
-
-        <!--<div class="container">-->
-            <!--<div style="height: 40px;"></div>-->
-            <!--<h2><a href="">International Lounges &nbsp;  <i class="fa fa-angle-down"></i></a></h2>-->
-        <!--</div>-->
-
-
-        <lounge-list-item types="['International', 'Regional', 'Local']">
-            <lounge-item
-                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
-                    name="My Lounge"
-                    content="hello"
-                    type="International"
-            ></lounge-item>
-            <lounge-item
-                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
-                    name="My Regional Lounge 2"
-                    content="hello 2"
-                    type="Regional"
-            ></lounge-item>
-        </lounge-list-item>
-
-        <div style="height: 50px;"></div>
-
-        <foot-item></foot-item>
-    </div>
-</script>
 <script type="text/ng-template" id="home-screen.html">
     <div screen="home">
 
@@ -392,6 +375,91 @@
         <featured-item></featured-item>
 
         <foot-item></foot-item>
+
+    </div>
+</script>
+<script type="text/ng-template" id="lounges-screen.html">
+    <div screen="lounges">
+
+
+        <hero-item
+                imgs="['http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME']"
+                heading="Our Lounges"
+        ></hero-item>
+
+
+        <!--<div class="container">-->
+            <!--<div style="height: 40px;"></div>-->
+            <!--<h2><a href="">International Lounges &nbsp;  <i class="fa fa-angle-down"></i></a></h2>-->
+        <!--</div>-->
+
+
+        <lounge-list-item types="['International', 'Regional', 'Local']">
+            <lounge-item
+                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
+                    name="My Lounge"
+                    content="hello"
+                    type="International"
+            ></lounge-item>
+
+            <lounge-item
+                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
+                    name="My Regional Lounge 2"
+                    content="hello 2"
+                    type="Regional"
+            ></lounge-item>
+
+            <lounge-item
+                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
+                    name="My Lounge"
+                    content="hello"
+                    type="International"
+            ></lounge-item>
+
+            <lounge-item
+                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
+                    name="My Lounge"
+                    content="hello"
+                    type="International"
+            ></lounge-item>
+
+            <lounge-item
+                    img="http://www.moooi.com/sites/default/files/styles/xtralarge/public/project-image/reception_lounge01.jpg?itok=79kBFgME"
+                    name="My Regional Lounge 2"
+                    content="hello 2"
+                    type="Regional"
+            ></lounge-item>
+        </lounge-list-item>
+
+        <div style="height: 50px;"></div>
+
+        <foot-item></foot-item>
+    </div>
+</script>
+<script type="text/ng-template" id="mission-screen.html">
+    <div screen="mission">
+
+        <!-- one way pass values to component -->
+        <hero-item
+                imgs="['public/img/lounges/airport.jpg']"
+                heading="Mission & Vision"
+        ></hero-item>
+
+        <block-item img="public/img/lounges/12.jpg">
+            <content>
+                <h1>Planned & Executed</h1>
+
+                <p>
+                    The VIP Lounge aims to make the planning and execution of your event as easy and stress free as possible. Our experienced and dedicated events coordinators will guide you through every step of planning your event, from designing your event theme to choosing menus and putting the finishing flourishes to your plans.
+                </p>
+                <p>
+                    Every one of our clients has a distinct vision for their big day and we will work with you combining your dreams with our ideas and years of experience in executing stunning and flawless events.
+                </p>
+            </content>
+        </block-item>
+
+        <foot-item></foot-item>
+
 
     </div>
 </script>
@@ -453,33 +521,6 @@
         <!--<div style="height: 50px;"></div>-->
 
         <foot-item></foot-item>
-    </div>
-</script>
-<script type="text/ng-template" id="mission-screen.html">
-    <div screen="mission">
-
-        <!-- one way pass values to component -->
-        <hero-item
-                imgs="['public/img/lounges/airport.jpg']"
-                heading="Mission & Vision"
-        ></hero-item>
-
-        <block-item img="public/img/lounges/12.jpg">
-            <content>
-                <h1>Planned & Executed</h1>
-
-                <p>
-                    The VIP Lounge aims to make the planning and execution of your event as easy and stress free as possible. Our experienced and dedicated events coordinators will guide you through every step of planning your event, from designing your event theme to choosing menus and putting the finishing flourishes to your plans.
-                </p>
-                <p>
-                    Every one of our clients has a distinct vision for their big day and we will work with you combining your dreams with our ideas and years of experience in executing stunning and flawless events.
-                </p>
-            </content>
-        </block-item>
-
-        <foot-item></foot-item>
-
-
     </div>
 </script>
 <script src="public/lib.js"></script>

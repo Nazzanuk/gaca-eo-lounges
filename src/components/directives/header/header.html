@@ -1,5 +1,7 @@
 <script type="text/ng-template" id="header.html">
     <div class="header">
+        <div class="hide" ng-transclude></div>
+
         <div class="container">
             <!--<span class="logo">GACA-EO</span>-->
 
@@ -9,10 +11,18 @@
 
             <div class="header-menu hidden-xs">
                 <div class="menu-item"
-                     ng-repeat="page in header.getPages()"
-                     ng-click="header.setPage(page.slug)"
-                     ng-class="{active:header.isCurrentPage(page.slug)}"
-                >{{page.name}}
+                     ng-repeat="page in header.getPages() track by $index"
+                     ng-click="header.clickMenuItem($index);"
+                     ng-class="{active:header.isCurrentPage(page.url)}"
+                >{{page.name}} <span ng-show="page.sub">&nbsp; <i class="fa fa-caret-down"></i></span>
+
+                    <div class="sub-menu" ng-class="{active:page.active}">
+                        <a class="sub-menu-item"
+                             ng-repeat="sub in page.sub track by $index"
+                             href="{{sub.url}}"
+                        >{{sub.name}}</a>
+
+                    </div>
                 </div>
             </div>
 
@@ -29,8 +39,8 @@
 
             <div class="sidebar-item"
                  ng-repeat="page in header.getPages()"
-                 ng-click="header.setPage(page.slug);header.toggleSidebar()"
-                 ng-class="{active:header.isCurrentPage(page.slug)}"
+                 ng-click="header.setPage(page.url);header.toggleSidebar()"
+                 ng-class="{active:header.isCurrentPage(page.url)}"
             >{{page.name}}</div>
 
         </div>

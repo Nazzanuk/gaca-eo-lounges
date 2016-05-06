@@ -7,14 +7,14 @@ header-item {
     padding-top: 30px;
     //height: 50px;
     line-height: 50px;
-    border-bottom: rgba(255,255,255,0.45) 1px solid;
+    border-bottom: rgba(255, 255, 255, 0.45) 1px solid;
     z-index: 1000;
     color: white;
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 900;
     letter-spacing: 1px;
-    background: rgba(0,0,0,0.15);
+    background: rgba(0, 0, 0, 0.15);
 
     .butn {
       margin: 5px 30px 0 0;
@@ -54,7 +54,7 @@ header-item {
         padding-top: 29px;
         //height: 50px;
         line-height: 50px;
-        border-bottom: rgba(0,0,0,0.15) 1px solid;
+        border-bottom: rgba(0, 0, 0, 0.15) 1px solid;
       }
 
       .sidebar-item {
@@ -63,7 +63,7 @@ header-item {
         padding-left: 15px;
         border-top: white 1px solid;
         cursor: pointer;
-        border-left:$primary 3px solid;
+        border-left: $primary 3px solid;
         transition: .2s;
 
         &:hover {
@@ -76,8 +76,6 @@ header-item {
         transform: translateX(0px);
       }
 
-
-
     }
 
     .header-menu {
@@ -85,18 +83,54 @@ header-item {
       .menu-item {
         float: left;
         line-height: 48px;
+        height: 50px;
         padding: 0 10px;
         border-bottom: 2px solid transparent;
         transition: .3s;
         cursor: pointer;
         //text-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+        position: relative;
+        user-select: none;
 
         &:hover {
-          border-bottom: 2px solid rgba(255,255,255,0.45);
+          //border-bottom: 2px solid rgba(255,255,255,0.45);
         }
 
         &.active {
-          border-bottom: 2px solid rgba(255,255,255,0.45);
+          //border-bottom: 2px solid rgba(255,255,255,0.45);
+        }
+
+        .sub-menu {
+          position: absolute;
+          top: 50px;
+          line-height: 50px;
+          min-width: 100%;
+          color: white;
+          left: 0;
+          visibility: hidden;
+
+          background: rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(255, 255, 255, 0.45);
+          transform: translateY(-10px);
+          transition: .3s;
+          opacity: 0;
+
+          &.active {
+            visibility: visible;
+            transform: translateY(0);
+            opacity: 1;
+          }
+
+          .sub-menu-item {
+            display: block;
+            padding: 0 10px;
+            transition: .3s;
+            color: white;
+
+            &:hover {
+              background: rgba(0, 0, 0, 0.3);
+            }
+          }
         }
       }
     }

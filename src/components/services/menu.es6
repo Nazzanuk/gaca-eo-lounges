@@ -1,21 +1,32 @@
 app.service('Menu', ($state, $stateParams, $timeout) => {
 
-    var currentPage,
-        pages = [
-            {name: "Home", slug: "home"},
-            {name: "Services", slug: "our-services"},
-            {name: "Lounges", slug: "lounges"},
-            {name: "Mission & Vision", slug: "mission"},
-            {name: "Contact", slug: "contact"}
-        ];
+    var currentPage, pages = [];
 
-    var setPage = (slug) => {
-        currentPage = slug;
-        $state.go(slug);
+    var setPage = (url) => {
+        currentPage = url;
+        //$state.go(url);
+        console.log('url', url);
+        window.location.href = url;
     };
 
-    var isCurrentPage = (slug) => {
-        return slug == (currentPage || $state.current.name);
+    var setPages = (obj) => {
+        pages = obj;
+    };
+
+    var clickMenuItem = (index) => {
+        if (pages[index].sub) {
+            pages[index].active = !(pages[index].active);
+        } else {
+            setPage(pages[index].url);
+        }
+    };
+
+    var setSubMenu = () => {
+
+    };
+
+    var isCurrentPage = (url) => {
+        return url == (currentPage || $state.current.name);
     };
 
     var init = () => {
@@ -26,6 +37,9 @@ app.service('Menu', ($state, $stateParams, $timeout) => {
     init();
 
     return {
+        setPages,
+        clickMenuItem,
+        setSubMenu,
         getPages: () => pages,
         setPage,
         isCurrentPage

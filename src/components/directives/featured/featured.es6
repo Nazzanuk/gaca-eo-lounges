@@ -5,7 +5,8 @@ app.component('featuredItems', {
     transclude: true,
     scope: {
         image: '@',
-        title: '@'
+        title: '@',
+        link: '@'
     },
     controller: function ($scope, $element, $timeout, Helper) {
 
